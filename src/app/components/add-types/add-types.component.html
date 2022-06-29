@@ -1,0 +1,16 @@
+<div class="list row">
+    <div class="col-md-6">
+        <label for="dropdown">Click drop down to select word type...</label>
+        <div class="form-group">
+            <select name="myType" class="form-control" [(ngModel)]="myType">
+                <option *ngFor="let type of types" value="{{type.sentenceType}}">{{type.sentenceType}}</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="instruction">Type-in word to add</label>
+            <input type="text" for="newText" class="form-control" id="newText" name="newWord" #newLine2>
+        </div>
+        <button (click)="onSelect(myType,newLine2)" class="btn btn-primary" type="submit">Insert Word</button>
+        <p>{{resMessage}}</p>
+    </div>
+</div>

@@ -1,0 +1,34 @@
+<div class="list row">
+    <div class="col-md-8">       
+        <label for="dropdown">Click drop down to select word type...</label>
+        <div class="form-group" >
+            <select #newWord (blur)="updateNewWord(newWord.value)" name="myType" class="form-control" >
+                <option  *ngFor="let type of types">{{type.sentenceType}}</option>
+            </select>
+        </div>
+        <button type="button" (click)="updateNewWord(newWord.value)">Get all: </button>
+        <label for="dropdownword">{{newWord.value}}</label>
+        <div class="form-group">
+            <select #newSelection (blur)="updateSelection(newSelection.value)" name="myType" class="form-control">
+                <option *ngFor="let item of currentList" value="{{item.noun}}">{{item.noun}}</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="instruction">click to:</label>
+            <button type="button" (click)="updateSelection(newSelection.value)">Add to Sentence: </button>
+            <input type="text" for="newText" class="form-control" id="newText" name="newWord">
+            <p>{{inprogress}}</p>
+            <label for="instruction">current sentence: {{inprogress}}</label>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <h4> Sentence Listings</h4>
+        <ul class="list-group">
+            <li class="list-group-item" *ngFor="let sentence of sentences">{{sentence.description}}
+            </li>
+        </ul>
+        <button class="m-3 btn btn-sm btn-danger" (click)="removeSentence()">
+            Remove sentence
+        </button>
+    </div>  
+</div>

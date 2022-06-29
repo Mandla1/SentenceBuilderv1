@@ -1,0 +1,56 @@
+<div *ngIf="viewMode; else editable">
+    <div *ngIf="currentSentence">
+        <h4>Sentence</h4>
+        <div>
+            <label><strong>Id</strong></label>{{ currentSentence}}
+        </div>
+        <div>
+            <label><strong>Description</strong></label>{{ currentSentence.description}}
+        </div>
+        <a
+            class="badge badge-warning"
+            routerLink="/sentence/{{ currentSentence}}">
+        Edit</a>
+    </div>
+    <div *ngIf="!currentSentence">
+        <br />
+        <p>Please click on a Sentence...</p>
+    </div>
+</div>
+<ng-template #editable>
+    <div *ngIf="currentSentence" class="edit-form">
+        <h4>Sentence</h4>
+        <form>
+            <div class="form-group">
+                <label for="Id">Id</label>
+                <input
+                    type="text"
+                    class="form-control"
+                    id="id"
+                    [(ngModel)]="currentSentence"
+                    name="id"/>
+            </div>
+            <div class="form-group">
+                <label for="description">Description</label>
+                <input
+                    type="text"
+                    class="form-control"
+                    id="description"
+                    [(ngModel)]="currentSentence.description"
+                    name="description"/>
+            </div>
+        </form>
+        <button class="badge badge-danger mr-2" (click)="deleteSentence()">Delete</button>
+        <button 
+            type="submit"
+            class="badge badge-success mb-2"
+            (click)="updateSentence()">
+            Update
+        </button>
+        <p>{{message}}</p>
+    </div>
+    <div *ngIf="!currentSentence">
+        <br />
+        <p>Cannot access this Sentence...</p>
+    </div>
+</ng-template>
