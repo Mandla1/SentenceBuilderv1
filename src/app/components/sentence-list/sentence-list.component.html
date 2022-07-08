@@ -5,30 +5,71 @@
             <select #newWord (blur)="updateNewWord(newWord.value)" name="myType" class="form-control" >
                 <option  *ngFor="let type of types">{{type.sentenceType}}</option>
             </select>
+        </div> 
+        <div [ngSwitch]="newSenType">
+            <div *ngSwitchCase="'Noun'" class="form-group">
+                <select #newSelection (blur)="updateSelection(newSelection.value)" name="nounType" class="form-control">
+                    <option *ngFor="let item of baseList" value="{{item.noun}}">{{item.noun}}</option>
+                </select>
+            </div>
+            <div *ngSwitchCase="'Verb'" class="form-group">
+                <select #newSelection (blur)="updateSelection(newSelection.value)" name="verbType" class="form-control">
+                    <option *ngFor="let item of baseList" value="{{item.verb}}">{{item.verb}}</option>
+                </select>
+            </div>
+            <div *ngSwitchCase="'Adjective'" class="form-group">
+                <select #newSelection (blur)="updateSelection(newSelection.value)" name="adjectiveType" class="form-control">
+                    <option *ngFor="let item of baseList" value="{{item.adjective}}">{{item.adjective}}</option>
+                </select>
+            </div>
+            <div *ngSwitchCase="'Adverb'" class="form-group">
+                <select #newSelection (blur)="updateSelection(newSelection.value)" name="adverbType" class="form-control">
+                    <option *ngFor="let item of baseList" value="{{item.adverb}}">{{item.adverb}}</option>
+                </select>
+            </div>
+            <div *ngSwitchCase="'Pronoun'" class="form-group">
+                <select #newSelection (blur)="updateSelection(newSelection.value)" name="pronounType" class="form-control">
+                    <option *ngFor="let item of baseList" value="{{item.pronoun}}">{{item.pronoun}}</option>
+                </select>
+            </div>
+            <div *ngSwitchCase="'Preposition'" class="form-group">
+                <select #newSelection (blur)="updateSelection(newSelection.value)" name="prepositionType" class="form-control">
+                    <option *ngFor="let item of baseList" value="{{item.preposition}}">{{item.preposition}}</option>
+                </select>
+            </div>
+            <div *ngSwitchCase="'Conjunction'" class="form-group">
+                <select #newSelection (blur)="updateSelection(newSelection.value)" name="conjuctionType" class="form-control">
+                    <option *ngFor="let item of baseList" value="{{item.conjunction}}">{{item.conjuction}}</option>
+                </select>
+            </div>
+            <div *ngSwitchCase="'Determiner'" class="form-group">
+                <select #newSelection (blur)="updateSelection(newSelection.value)" name="determinerType" class="form-control">
+                    <option *ngFor="let item of baseList" value="{{item.determiner}}">{{item.determiner}}</option>
+                </select>
+            </div>
+            <div *ngSwitchCase="'Exclamation'" class="form-group">
+                <select #newSelection (blur)="updateSelection(newSelection.value)" name="exclamationType" class="form-control">
+                    <option *ngFor="let item of baseList" value="{{item.exclamation}}">{{item.exclamation}}</option>
+                </select>
+            </div>
+            <div *ngSwitchDefault class="form-group">
+                <select #newSelection (blur)="updateSelection(newSelection.value)" name="myType" class="form-control">
+                    <option *ngFor="let item of baseList" value="{{item.noun}}">{{item.noun}}</option>
+                </select>
+            </div>           
         </div>
-        <button type="button" (click)="updateNewWord(newWord.value)">Get all: </button>
-        <label for="dropdownword">{{newWord.value}}</label>
-        <div class="form-group">
-            <select #newSelection (blur)="updateSelection(newSelection.value)" name="myType" class="form-control">
-                <option *ngFor="let item of currentList" value="{{item.noun}}">{{item.noun}}</option>
-            </select>
+        <div *ngIf="status===false">
+            <p>Current sentence: {{inprogress}}</p>
         </div>
-        <div class="form-group">
-            <label for="instruction">click to:</label>
-            <button type="button" (click)="updateSelection(newSelection.value)">Add to Sentence: </button>
-            <input type="text" for="newText" class="form-control" id="newText" name="newWord">
-            <p>{{inprogress}}</p>
-            <label for="instruction">current sentence: {{inprogress}}</label>
-        </div>
+        <button class="m-3 btn btn-sm btn-primary" (click)="commitSentence()">
+            Commit Sentence
+        </button>
     </div>
     <div class="col-md-6">
         <h4> Sentence Listings</h4>
         <ul class="list-group">
             <li class="list-group-item" *ngFor="let sentence of sentences">{{sentence.description}}
             </li>
-        </ul>
-        <button class="m-3 btn btn-sm btn-danger" (click)="removeSentence()">
-            Remove sentence
-        </button>
+        </ul>       
     </div>  
 </div>
